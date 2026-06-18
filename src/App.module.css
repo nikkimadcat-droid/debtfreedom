@@ -1,0 +1,254 @@
+.page {
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+}
+
+.header {
+  border-bottom: 1px solid var(--gray-200);
+  background: #fff;
+  position: sticky;
+  top: 0;
+  z-index: 10;
+}
+
+.headerInner {
+  max-width: 740px;
+  margin: 0 auto;
+  padding: .875rem 1.5rem;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1rem;
+}
+
+.logo {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.logoMark {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 34px;
+  height: 34px;
+  background: var(--green);
+  color: #fff;
+  font-size: 13px;
+  font-weight: 700;
+  border-radius: 8px;
+  font-family: var(--mono);
+  letter-spacing: -.03em;
+}
+
+.logoText {
+  font-size: 15px;
+  font-weight: 600;
+  color: var(--gray-900);
+}
+
+.tagline {
+  font-size: 12px;
+  color: var(--gray-400);
+  font-weight: 500;
+}
+
+.main {
+  flex: 1;
+  max-width: 740px;
+  margin: 0 auto;
+  padding: 2rem 1.5rem 3rem;
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  gap: 1.25rem;
+}
+
+.hero {
+  padding: .5rem 0 .75rem;
+}
+
+.headline {
+  font-size: 28px;
+  font-weight: 600;
+  color: var(--gray-900);
+  line-height: 1.3;
+  margin-bottom: .625rem;
+}
+
+.sub {
+  font-size: 16px;
+  color: var(--gray-500);
+  line-height: 1.6;
+  max-width: 560px;
+}
+
+.card {
+  background: #fff;
+  border: 1px solid var(--gray-200);
+  border-radius: var(--radius);
+  padding: 1.375rem 1.5rem;
+  box-shadow: var(--shadow);
+}
+
+.cardHeader {
+  margin-bottom: 1rem;
+}
+
+.cardHeader h2 {
+  font-size: 16px;
+  font-weight: 600;
+  color: var(--gray-900);
+  margin-bottom: 3px;
+}
+
+.cardHeader p {
+  font-size: 13px;
+  color: var(--gray-400);
+  line-height: 1.5;
+}
+
+.budgetRow {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  flex-wrap: wrap;
+}
+
+.budgetInput {
+  position: relative;
+  display: flex;
+  align-items: center;
+  flex-shrink: 0;
+}
+
+.dollar {
+  position: absolute;
+  left: 10px;
+  color: var(--gray-400);
+  font-size: 15px;
+  pointer-events: none;
+}
+
+.budgetInput input {
+  width: 160px;
+  height: 44px;
+  font-size: 18px;
+  font-weight: 500;
+  padding: 0 52px 0 24px;
+  border-radius: 8px;
+}
+
+.perMonth {
+  position: absolute;
+  right: 10px;
+  font-size: 12px;
+  color: var(--gray-400);
+  pointer-events: none;
+  white-space: nowrap;
+}
+
+.budgetHint {
+  font-size: 13px;
+  color: var(--gray-400);
+  max-width: 300px;
+}
+
+.error {
+  background: var(--red-light);
+  border: 1px solid #f5c6c3;
+  border-radius: var(--radius);
+  padding: .75rem 1rem;
+  font-size: 14px;
+  color: var(--red);
+}
+
+.calcBtn {
+  background: var(--green);
+  color: #fff;
+  border: none;
+  border-radius: var(--radius);
+  padding: 14px 28px;
+  font-size: 16px;
+  font-weight: 600;
+  letter-spacing: -.01em;
+  transition: background .15s, transform .1s;
+  align-self: flex-start;
+}
+
+.calcBtn:hover { background: var(--green-mid); }
+.calcBtn:active { transform: scale(0.98); }
+
+.resultsWrap {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+
+.resultsHeader {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.resultsHeader h2 {
+  font-size: 20px;
+  font-weight: 600;
+  color: var(--gray-900);
+}
+
+.resetBtn {
+  background: none;
+  border: 1px solid var(--gray-200);
+  border-radius: 7px;
+  padding: 6px 14px;
+  font-size: 13px;
+  color: var(--gray-500);
+  transition: border-color .15s, color .15s;
+}
+
+.resetBtn:hover { border-color: var(--gray-400); color: var(--gray-700); }
+
+.noResult {
+  padding: 1.5rem;
+  background: var(--amber-light);
+  border-radius: var(--radius);
+  font-size: 14px;
+  color: var(--amber);
+}
+
+.footer {
+  border-top: 1px solid var(--gray-200);
+  background: #fff;
+  margin-top: auto;
+}
+
+.footerInner {
+  max-width: 740px;
+  margin: 0 auto;
+  padding: 1.5rem;
+  display: flex;
+  flex-direction: column;
+  gap: .5rem;
+}
+
+.footerInner > p {
+  font-size: 13px;
+  color: var(--gray-500);
+  line-height: 1.6;
+}
+
+.footerSmall {
+  font-size: 12px !important;
+  color: var(--gray-400) !important;
+}
+
+@media (max-width: 640px) {
+  .main { padding: 1.5rem 1rem 2.5rem; }
+  .headline { font-size: 22px; }
+  .tagline { display: none; }
+  .calcBtn { width: 100%; text-align: center; }
+  .card { padding: 1.125rem 1rem; }
+}

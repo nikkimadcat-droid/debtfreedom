@@ -1,0 +1,62 @@
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+:root {
+  --green: #1a7a4a;
+  --green-light: #e8f5ee;
+  --green-mid: #2d9e64;
+  --red: #c0392b;
+  --red-light: #fdf0ef;
+  --blue: #1a5fa8;
+  --blue-light: #eaf1fb;
+  --amber: #b45309;
+  --amber-light: #fef3c7;
+  --gray-50: #f9fafb;
+  --gray-100: #f3f4f6;
+  --gray-200: #e5e7eb;
+  --gray-400: #9ca3af;
+  --gray-500: #6b7280;
+  --gray-700: #374151;
+  --gray-900: #111827;
+  --font: 'Inter', system-ui, sans-serif;
+  --mono: 'DM Mono', 'Fira Mono', monospace;
+  --radius: 10px;
+  --shadow: 0 1px 3px rgba(0,0,0,.08), 0 1px 2px rgba(0,0,0,.04);
+}
+
+body {
+  font-family: var(--font);
+  font-size: 15px;
+  line-height: 1.6;
+  color: var(--gray-900);
+  background: var(--gray-50);
+  -webkit-font-smoothing: antialiased;
+}
+
+input[type="text"],
+input[type="number"] {
+  font-family: var(--font);
+  font-size: 14px;
+  height: 36px;
+  padding: 0 10px;
+  border: 1px solid var(--gray-200);
+  border-radius: 7px;
+  background: #fff;
+  color: var(--gray-900);
+  width: 100%;
+  transition: border-color .15s;
+}
+
+input:focus {
+  outline: none;
+  border-color: var(--green-mid);
+  box-shadow: 0 0 0 3px rgba(45,158,100,.12);
+}
+
+button {
+  font-family: var(--font);
+  cursor: pointer;
+}
+
+@media (max-width: 640px) {
+  body { font-size: 14px; }
+}
