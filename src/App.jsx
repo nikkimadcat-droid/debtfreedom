@@ -3,6 +3,7 @@ import DebtForm from './components/DebtForm.jsx'
 import Results from './components/Results.jsx'
 import BalanceTransferCalc from './components/BalanceTransferCalc.jsx'
 import HardshipCalc from './components/HardshipCalc.jsx'
+import CompareStrategies from './components/CompareStrategies.jsx'
 import { calculatePayoff } from './calcEngine.js'
 import styles from './App.module.css'
 
@@ -24,6 +25,7 @@ const TABS = [
   { id: 'planner', label: 'Payoff planner' },
   { id: 'transfer', label: 'Balance transfer' },
   { id: 'hardship', label: 'Hardship rate' },
+  { id: 'compare', label: 'Compare strategies' },
 ]
 
 export default function App() {
@@ -167,6 +169,7 @@ export default function App() {
 
         {tab === 'transfer' && <BalanceTransferCalc />}
         {tab === 'hardship' && <HardshipCalc />}
+        {tab === 'compare' && <CompareStrategies />}
       </main>
 
       <footer className={styles.footer}>
