@@ -1,6 +1,8 @@
 import { useState, useCallback } from 'react'
 import DebtForm from './components/DebtForm.jsx'
 import Results from './components/Results.jsx'
+import BalanceTransferCalc from './components/BalanceTransferCalc.jsx'
+import HardshipCalc from './components/HardshipCalc.jsx'
 import { calculatePayoff } from './calcEngine.js'
 import styles from './App.module.css'
 
@@ -18,7 +20,14 @@ function parseDebts(debts) {
   }))
 }
 
+const TABS = [
+  { id: 'planner', label: 'Payoff planner' },
+  { id: 'transfer', label: 'Balance transfer' },
+  { id: 'hardship', label: 'Hardship rate' },
+]
+
 export default function App() {
+  const [tab, setTab] = useState('planner')
   const [debts, setDebts] = useState(DEFAULT_DEBTS)
   const [budget, setBudget] = useState('')
   const [result, setResult] = useState(null)
@@ -76,69 +85,88 @@ export default function App() {
           </h1>
           <p className={styles.sub}>
             Enter your balances. Enter your monthly budget. Get a month-by-month plan — 
-            with the right payoff order to save the most in interest.
+            with the right payoff order to save the most in interest. Plus two tools most people don't know exist.
           </p>
         </div>
 
-        <div className={styles.card}>
-          <div className={styles.cardHeader}>
-            <h2>Your debts</h2>
-            <p>Include credit cards, loans, HELOCs — anything you're paying down. Set APR to 0 for promotional 0% cards.</p>
-          </div>
-          <DebtForm debts={debts} onChange={setDebts} />
+        <div className={styles.tabs}>
+          {TABS.map(t => (
+            <button
+              key={t.id}
+              className={`${styles.tab} ${tab === t.id ? styles.tabActive : ''}`}
+              onClick={() => setTab(t.id)}
+            >
+              {t.label}
+            </button>
+          ))}
         </div>
 
-        <div className={styles.card}>
-          <div className={styles.cardHeader}>
-            <h2>Monthly attack budget</h2>
-            <p>How much can you put toward debt each month — after rent/mortgage, utilities, food, and other fixed bills?</p>
-          </div>
-          <div className={styles.budgetRow}>
-            <div className={styles.budgetInput}>
-              <span className={styles.dollar}>$</span>
-              <input
-                type="number"
-                placeholder="e.g. 800"
-                min="1"
-                step="10"
-                value={budget}
-                onChange={e => setBudget(e.target.value)}
-                onKeyDown={e => e.key === 'Enter' && handleCalculate()}
-                aria-label="Monthly attack budget in dollars"
-              />
-              <span className={styles.perMonth}>/month</span>
+        {tab === 'planner' && (
+          <>
+            <div className={styles.card}>
+              <div className={styles.cardHeader}>
+                <h2>Your debts</h2>
+                <p>Include credit cards, loans, HELOCs — anything you're paying down. Set APR to 0 for promotional 0% cards.</p>
+              </div>
+              <DebtForm debts={debts} onChange={setDebts} />
             </div>
-            <p className={styles.budgetHint}>
-              Even $50 extra per month makes a real difference in payoff time.
-            </p>
-          </div>
-        </div>
 
-        {error && (
-          <div className={styles.error} role="alert">{error}</div>
-        )}
-
-        <button className={styles.calcBtn} onClick={handleCalculate}>
-          Show my payoff plan →
-        </button>
-
-        <div id="results-anchor" />
-
-        {calculated && result && (
-          <div className={styles.resultsWrap}>
-            <div className={styles.resultsHeader}>
-              <h2>Your payoff plan</h2>
-              <button className={styles.resetBtn} onClick={handleReset}>Start over</button>
+            <div className={styles.card}>
+              <div className={styles.cardHeader}>
+                <h2>Monthly attack budget</h2>
+                <p>How much can you put toward debt each month — after rent/mortgage, utilities, food, and other fixed bills?</p>
+              </div>
+              <div className={styles.budgetRow}>
+                <div className={styles.budgetInput}>
+                  <span className={styles.dollar}>$</span>
+                  <input
+                    type="number"
+                    placeholder="e.g. 800"
+                    min="1"
+                    step="10"
+                    value={budget}
+                    onChange={e => setBudget(e.target.value)}
+                    onKeyDown={e => e.key === 'Enter' && handleCalculate()}
+                    aria-label="Monthly attack budget in dollars"
+                  />
+                  <span className={styles.perMonth}>/month</span>
+                </div>
+                <p className={styles.budgetHint}>
+                  Even $50 extra per month makes a real difference in payoff time.
+                </p>
+              </div>
             </div>
-            <Results result={result} />
-          </div>
+
+            {error && (
+              <div className={styles.error} role="alert">{error}</div>
+            )}
+
+            <button className={styles.calcBtn} onClick={handleCalculate}>
+              Show my payoff plan →
+            </button>
+
+            <div id="results-anchor" />
+
+            {calculated && result && (
+              <div className={styles.resultsWrap}>
+                <div className={styles.resultsHeader}>
+                  <h2>Your payoff plan</h2>
+                  <button className={styles.resetBtn} onClick={handleReset}>Start over</button>
+                </div>
+                <Results result={result} />
+              </div>
+            )}
+
+            {calculated && !result && (
+              <div className={styles.noResult}>
+                Something doesn't add up — check your balances and budget and try again.
+              </div>
+            )}
+          </>
         )}
 
-        {calculated && !result && (
-          <div className={styles.noResult}>
-            Something doesn't add up — check your balances and budget and try again.
-          </div>
-        )}
+        {tab === 'transfer' && <BalanceTransferCalc />}
+        {tab === 'hardship' && <HardshipCalc />}
       </main>
 
       <footer className={styles.footer}>
@@ -150,6 +178,7 @@ export default function App() {
           <p className={styles.footerSmall}>
             Results are estimates. Interest calculations assume monthly compounding. 
             Minimum payments estimated at 2% of balance (min $25). Always verify with your lenders.
+            This is not financial advice.
           </p>
         </div>
       </footer>
