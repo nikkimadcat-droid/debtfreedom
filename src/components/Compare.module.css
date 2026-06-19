@@ -1,27 +1,27 @@
 .debtList {
   display: flex;
   flex-direction: column;
-  gap: 8px;
+  gap: 10px;
 }
 
-.debtHeader {
-  display: grid;
-  grid-template-columns: 2fr 1.2fr 1fr 1.2fr 32px;
-  gap: 8px;
-  font-size: 11px;
-  font-weight: 500;
-  color: var(--gray-400);
-  text-transform: uppercase;
-  letter-spacing: .04em;
-  padding: 0 0 2px;
+.debtCard {
+  background: var(--gray-50);
+  border: 1px solid var(--gray-200);
+  border-radius: var(--radius);
+  padding: 1rem;
+  display: flex;
+  flex-direction: column;
+  gap: .75rem;
 }
 
-.debtRow {
+.debtCardTop {
   display: grid;
-  grid-template-columns: 2fr 1.2fr 1fr 1.2fr 32px;
+  grid-template-columns: 2fr 1.4fr 1fr 32px;
   gap: 8px;
   align-items: center;
 }
+
+.nameInput { width: 100%; }
 
 .prefixInput {
   position: relative;
@@ -37,7 +37,23 @@
   pointer-events: none;
 }
 
-.prefixInput input { padding-left: 20px; }
+.prefixInput input { padding-left: 20px; width: 100%; }
+
+.suffixInput {
+  position: relative;
+  display: flex;
+  align-items: center;
+}
+
+.suffixInput input { padding-right: 36px; width: 100%; }
+
+.suffixInput span {
+  position: absolute;
+  right: 10px;
+  font-size: 12px;
+  color: var(--gray-400);
+  pointer-events: none;
+}
 
 .removeBtn {
   background: none;
@@ -56,6 +72,80 @@
 .removeBtn:hover:not(:disabled) { color: var(--red); background: var(--red-light); }
 .removeBtn:disabled { opacity: .3; cursor: default; }
 
+.actionRow {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  flex-wrap: wrap;
+}
+
+.actionLabel {
+  font-size: 12px;
+  font-weight: 500;
+  color: var(--gray-500);
+  white-space: nowrap;
+}
+
+.actionBtns {
+  display: flex;
+  gap: 6px;
+  flex-wrap: wrap;
+}
+
+.actionBtn {
+  background: #fff;
+  border: 1px solid var(--gray-200);
+  border-radius: 6px;
+  padding: 5px 10px;
+  font-size: 12px;
+  font-weight: 500;
+  color: var(--gray-500);
+  cursor: pointer;
+  transition: all .15s;
+}
+
+.actionBtn:hover { border-color: var(--gray-400); color: var(--gray-700); }
+
+.actionBtnActive {
+  background: var(--green-light) !important;
+  border-color: var(--green-mid) !important;
+  color: var(--green) !important;
+}
+
+.actionDetails {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  flex-wrap: wrap;
+  padding: .625rem .75rem;
+  background: #fff;
+  border-radius: 6px;
+  border-left: 3px solid var(--green);
+}
+
+.detailField {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.detailField label {
+  font-size: 12px;
+  color: var(--gray-500);
+  white-space: nowrap;
+}
+
+.detailField .suffixInput input {
+  width: 80px;
+}
+
+.detailNote {
+  font-size: 12px;
+  color: var(--gray-400);
+  font-style: italic;
+  flex: 1;
+}
+
 .addBtn {
   background: none;
   border: 1px dashed var(--gray-200);
@@ -65,7 +155,6 @@
   color: var(--gray-500);
   cursor: pointer;
   align-self: flex-start;
-  margin-top: 2px;
 }
 
 .addBtn:hover { border-color: var(--green-mid); color: var(--green); background: var(--green-light); }
@@ -178,15 +267,10 @@
 
 @media (max-width: 640px) {
   .grid { grid-template-columns: 1fr; }
-  .debtHeader { display: none; }
-  .debtRow {
+  .debtCardTop {
     grid-template-columns: 1fr 1fr;
-    gap: 6px;
-    padding: 10px;
-    background: #fff;
-    border: 1px solid var(--gray-200);
-    border-radius: var(--radius);
+    grid-template-rows: auto auto;
   }
-  .debtRow > input:first-child { grid-column: 1 / -1; }
+  .debtCardTop .nameInput { grid-column: 1 / -1; }
   .removeBtn { grid-column: 2; grid-row: 1; justify-self: end; }
 }
