@@ -1,1 +1,192 @@
+.debtList {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
 
+.debtHeader {
+  display: grid;
+  grid-template-columns: 2fr 1.2fr 1fr 1.2fr 32px;
+  gap: 8px;
+  font-size: 11px;
+  font-weight: 500;
+  color: var(--gray-400);
+  text-transform: uppercase;
+  letter-spacing: .04em;
+  padding: 0 0 2px;
+}
+
+.debtRow {
+  display: grid;
+  grid-template-columns: 2fr 1.2fr 1fr 1.2fr 32px;
+  gap: 8px;
+  align-items: center;
+}
+
+.prefixInput {
+  position: relative;
+  display: flex;
+  align-items: center;
+}
+
+.prefixInput span {
+  position: absolute;
+  left: 10px;
+  color: var(--gray-400);
+  font-size: 14px;
+  pointer-events: none;
+}
+
+.prefixInput input { padding-left: 20px; }
+
+.removeBtn {
+  background: none;
+  border: none;
+  color: var(--gray-400);
+  font-size: 20px;
+  line-height: 1;
+  padding: 4px;
+  border-radius: 5px;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.removeBtn:hover:not(:disabled) { color: var(--red); background: var(--red-light); }
+.removeBtn:disabled { opacity: .3; cursor: default; }
+
+.addBtn {
+  background: none;
+  border: 1px dashed var(--gray-200);
+  border-radius: var(--radius);
+  padding: 7px 14px;
+  font-size: 13px;
+  color: var(--gray-500);
+  cursor: pointer;
+  align-self: flex-start;
+  margin-top: 2px;
+}
+
+.addBtn:hover { border-color: var(--green-mid); color: var(--green); background: var(--green-light); }
+
+.budgetRow {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.budgetRow label {
+  font-size: 13px;
+  color: var(--gray-500);
+  font-weight: 500;
+  white-space: nowrap;
+}
+
+.results {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+  border-top: 1px solid var(--gray-100);
+  padding-top: 1.25rem;
+}
+
+.grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 12px;
+}
+
+.col {
+  background: var(--gray-50);
+  border: 1px solid var(--gray-200);
+  border-radius: var(--radius);
+  padding: 1rem;
+  display: flex;
+  flex-direction: column;
+  gap: .75rem;
+}
+
+.winner {
+  background: var(--green-light);
+  border-color: var(--green-mid);
+  border-width: 2px;
+}
+
+.colBadge {
+  font-size: 11px;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: .05em;
+  color: var(--gray-500);
+}
+
+.winner .colBadge { color: var(--green); }
+
+.colTitle {
+  font-size: 12px;
+  color: var(--gray-500);
+  line-height: 1.4;
+}
+
+.winner .colTitle { color: var(--gray-700); }
+
+.stat {}
+
+.statLabel {
+  font-size: 11px;
+  color: var(--gray-400);
+  font-weight: 500;
+  margin-bottom: 2px;
+}
+
+.statValue {
+  font-size: 18px;
+  font-weight: 600;
+  color: var(--gray-900);
+  font-variant-numeric: tabular-nums;
+}
+
+.winner .statValue { color: var(--green); }
+
+.savings {
+  font-size: 12px;
+  color: var(--green);
+  font-weight: 500;
+  padding: .5rem .75rem;
+  background: #fff;
+  border-radius: 6px;
+  line-height: 1.5;
+}
+
+.diff {
+  font-size: 12px;
+  color: var(--gray-400);
+  line-height: 1.5;
+}
+
+.bottomLine {
+  background: var(--gray-900);
+  color: #fff;
+  border-radius: var(--radius);
+  padding: 1rem 1.25rem;
+  font-size: 14px;
+  line-height: 1.6;
+}
+
+.bottomLine strong { color: #6ee7b7; }
+
+@media (max-width: 640px) {
+  .grid { grid-template-columns: 1fr; }
+  .debtHeader { display: none; }
+  .debtRow {
+    grid-template-columns: 1fr 1fr;
+    gap: 6px;
+    padding: 10px;
+    background: #fff;
+    border: 1px solid var(--gray-200);
+    border-radius: var(--radius);
+  }
+  .debtRow > input:first-child { grid-column: 1 / -1; }
+  .removeBtn { grid-column: 2; grid-row: 1; justify-self: end; }
+}
